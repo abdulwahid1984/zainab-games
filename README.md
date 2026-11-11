@@ -4,7 +4,7 @@ A colorful, phone-friendly family game night website hosted on GitHub Pages.
 
 ## Games
 
-The home page puts original mini-games inspired by 2026 kids' favorites first, followed by quick-play, board, online, and adventure games. The catalog includes Block Pop Builder, Goal Stars, Jungle Obby Dash, Candy Pop, Turbo Racers, Ludo, Sky Island Survival, Tic-Tac-Toe, Connect Four, and more. Rainbow Archery is a playable 10 m and 15 m archery range with draw-and-release shooting, adjustable aim, and wind. These are original web games, not ports of commercial games.
+The home page puts original mini-games inspired by 2026 kids' favorites first, followed by quick-play, board, online, and adventure games. The catalog includes Block Pop Builder, Goal Stars, Jungle Obby Dash, Candy Pop, Turbo Racers, Ludo, Sky Island Survival, Tic-Tac-Toe, Connect Four, and more. Rainbow Archery is a playable 10 m and 15 m archery range with draw-and-release shooting, adjustable aim, and wind. Cosmic Defender adds five escalating mobile-friendly waves; Chef's Rush adds timed order-combo levels. The redesigned arcade includes search, saved favorites, motion, and a local daily XP challenge. These are original web games, not ports of commercial games.
 
 ## Profiles, friends, and chat
 

@@ -126,3 +126,116 @@ begin
 exception when duplicate_object then null;
 end $$;
 
+
+-- Zainab Games: authenticated, invite-code group rooms and realtime access.
+create table if not exists public.social_rooms (
+  room_code text primary key check (room_code ~ '^[A-HJ-NP-Z2-9]{8}$'),
+  created_by uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  expires_at timestamptz not null default (now() + interval '12 hours')
+);
+create table if not exists public.social_room_members (
+  room_code text not null references public.social_rooms(room_code) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  joined_at timestamptz not null default now(),
+  primary key (room_code,user_id)
+);
+create index if not exists social_room_members_user_idx on public.social_room_members(user_id,room_code);
+alter table public.social_rooms enable row level security;
+alter table public.social_room_members enable row level security;
+grant select on public.social_room_members to authenticated;
+drop policy if exists "players view own social room memberships" on public.social_room_members;
+create policy "players view own social room memberships" on public.social_room_members
+ for select to authenticated using ((select auth.uid()) = user_id);
+
+create or replace function public.create_social_room()
+returns text language plpgsql security definer set search_path = public
+as $$
+declare v_user uuid := auth.uid(); v_code text; v_alphabet text := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; i integer;
+begin
+  if v_user is null then raise exception 'Sign in first'; end if;
+  loop
+    v_code := '';
+    for i in 1..8 loop v_code := v_code || substr(v_alphabet,1+floor(random()*length(v_alphabet))::int,1); end loop;
+    insert into public.social_rooms(room_code,created_by) values(v_code,v_user) on conflict do nothing;
+    if found then exit; end if;
+  end loop;
+  insert into public.social_room_members(room_code,user_id) values(v_code,v_user);
+  return v_code;
+end;
+$$;
+revoke all on function public.create_social_room() from public,anon;
+grant execute on function public.create_social_room() to authenticated;
+
+create or replace function public.join_social_room(p_room_code text)
+returns boolean language plpgsql security definer set search_path = public
+as $$
+declare v_user uuid := auth.uid(); v_code text := upper(trim(p_room_code));
+begin
+  if v_user is null then raise exception 'Sign in first'; end if;
+  if v_code !~ '^[A-HJ-NP-Z2-9]{8}$' then raise exception 'Enter the 8-character family room code'; end if;
+  if not exists(select 1 from public.social_rooms r where r.room_code=v_code and r.expires_at>now()) then
+    raise exception 'That room code expired or was not found';
+  end if;
+  insert into public.social_room_members(room_code,user_id) values(v_code,v_user) on conflict do nothing;
+  return true;
+end;
+$$;
+revoke all on function public.join_social_room(text) from public,anon;
+grant execute on function public.join_social_room(text) to authenticated;
+
+drop policy if exists "authenticated players receive Zainab social presence and chat" on realtime.messages;
+create policy "authenticated players receive Zainab social presence and chat" on realtime.messages
+ for select to authenticated
+ using (
+   realtime.messages.extension in ('broadcast','presence')
+   and (
+     realtime.topic()='zainab-lobby'
+     or (
+       realtime.topic() ~ '^zainab-party-[A-HJ-NP-Z2-9]{8}$'
+       and exists (
+         select 1 from public.social_room_members m
+         join public.social_rooms r on r.room_code=m.room_code
+         where m.user_id=(select auth.uid())
+           and 'zainab-party-' || m.room_code = (select realtime.topic())
+           and r.expires_at>now()
+       )
+     )
+   )
+ );
+drop policy if exists "authenticated players send Zainab social presence and chat" on realtime.messages;
+create policy "authenticated players send Zainab social presence and chat" on realtime.messages
+ for insert to authenticated
+ with check (
+   realtime.messages.extension in ('broadcast','presence')
+   and (
+     realtime.topic()='zainab-lobby'
+     or (
+       realtime.topic() ~ '^zainab-party-[A-HJ-NP-Z2-9]{8}$'
+       and exists (
+         select 1 from public.social_room_members m
+         join public.social_rooms r on r.room_code=m.room_code
+         where m.user_id=(select auth.uid())
+           and 'zainab-party-' || m.room_code = (select realtime.topic())
+           and r.expires_at>now()
+       )
+     )
+   )
+ );
+-- Private Realtime topic permissions for globally matched games.
+drop policy if exists "match players receive private match changes" on realtime.messages;
+create policy "match players receive private match changes" on realtime.messages
+ for select to authenticated using (
+   realtime.messages.extension = 'postgres_changes'
+   and exists (
+     select 1 from public.matches m
+     where 'match-' || m.id::text = (select realtime.topic())
+       and (m.player_x=(select auth.uid()) or m.player_o=(select auth.uid()))
+   )
+ );create index if not exists social_rooms_created_by_idx on public.social_rooms(created_by);
+grant select on public.social_rooms to authenticated;
+drop policy if exists "players view their own social rooms" on public.social_rooms;
+create policy "players view their own social rooms" on public.social_rooms
+ for select to authenticated
+ using (exists(select 1 from public.social_room_members m where m.room_code=social_rooms.room_code and m.user_id=(select auth.uid())));
+

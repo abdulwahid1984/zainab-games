@@ -1,21 +1,16 @@
 # Zainab Games
 
-A mobile-friendly, single-page game night website. Open `index.html` locally to try the games.
+A colorful, mobile-friendly family game night website published with GitHub Pages.
 
-## What is included
+## Games
 
-- Ten quick games: Tic-Tac-Toe, Memory Match, Rock Paper Scissors, Dice Duel, Guess the Number, Quick Quiz, Word Scramble, Lucky Spinner, Heads or Tails, and Color Tap.
-- Room invite links with a room code.
-- PeerJS/WebRTC voice and direct file transfer (up to 5 MB per file in this demo).
-- Responsive layout for phones and desktop browsers.
+Five room games sync turns between two browsers: Tic-Tac-Toe, Connect Four, Dot Dash, Guess & Grab, and Word Race. Nine quick party games can be played locally or pass-and-play: Memory Match, Rock Paper Scissors, Dice Duel, Quick Quiz, Lucky Spinner, Heads or Tails, Color Tap, Number Ninja, and Word Scramble.
 
-## Free hosting
+## Rooms, voice, and files
 
-The site is static and can be published on GitHub Pages at no hosting charge for a public repository. Create a public GitHub repository, upload `index.html`, then in **Settings → Pages** select deployment from the `main` branch and root folder. GitHub will show the published URL when the deployment finishes. Rename the repository to `zainab-games` if you want a matching project URL.
+Create a room and share its invite URL. The host must keep the room open while the other player joins. PeerJS provides signaling and WebRTC peer connections; voice and files go directly between connected browsers. Voice requires HTTPS and microphone permission. File sharing is limited to 5 MB in this demo, and files are not stored. Connection availability depends on the public PeerJS cloud and the players' networks.
 
-Voice requires the site to be served over HTTPS and users to allow microphone access. The room host needs to open the room before guests join. The PeerJS public cloud is used for connection signaling; voice and files travel peer-to-peer. PeerJS cloud availability and browser/network restrictions can affect connections.
+## Hosting
 
-## Current scope
-
-Games are playable locally in each browser (or pass-and-play on one phone). Room membership does not yet synchronize game turns or scores across devices. Files are sent directly and are not stored. This starter does not include accounts, moderation, or a persistent chat history.
+GitHub Pages uses the workflow in `.github/workflows/pages.yml`. New commits to `main` trigger a deployment.
 

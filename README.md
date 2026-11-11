@@ -4,7 +4,7 @@ A colorful, phone-friendly family game night website hosted on GitHub Pages.
 
 ## Games
 
-The home page puts original mini-games inspired by 2026 kids' favorites first, followed by quick-play, board, online, and adventure games. The catalog includes Block Pop Builder, Goal Stars, Jungle Obby Dash, Candy Pop, Turbo Racers, Ludo, Sky Island Survival, Tic-Tac-Toe, Connect Four, and more. These are original web games, not ports of commercial games.
+The home page puts original mini-games inspired by 2026 kids' favorites first, followed by quick-play, board, online, and adventure games. The catalog includes Block Pop Builder, Goal Stars, Jungle Obby Dash, Candy Pop, Turbo Racers, Ludo, Sky Island Survival, Tic-Tac-Toe, Connect Four, and more. Rainbow Archery is a quick aim-and-shoot target game with a light wind challenge. These are original web games, not ports of commercial games.
 
 ## Profiles, friends, and chat
 

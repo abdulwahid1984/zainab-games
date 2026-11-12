@@ -14,7 +14,7 @@ Online board games also offer computer play. Worldwide matchmaking and live play
 
 ## Profiles and child-friendly chat
 
-Guest play does not require registration. Email sign-in enables a player name, avatar, online presence, and worldwide matchmaking. Lobby and game chat use friendly preset phrases. Family group rooms have a short code and expire after 12 hours.
+Guest play does not require registration. Email sign-in enables a player name, avatar, and worldwide matchmaking; guests appear in the online lobby with a temporary nickname. Family group rooms use a 12-character code or copied invite link and expire after 12 hours. Lobby and in-game chat use friendly preset phrases.
 
 ## Coloring and sound
 
@@ -25,6 +25,7 @@ Coloring Art Studio has 15 searchable pictures, fill, brush and eraser tools, un
 GitHub Pages deploys from `main` using `.github/workflows/pages.yml`. Set the Supabase Auth allowed redirect URL to `https://abdulwahid1984.github.io/zainab-games/`. `supabase-config.js` contains only the public browser key; never place a service-role key there.
 
 The database schema and setup notes are in `supabase/schema.sql` and `supabase/social-chat.sql`.
+
 
 
 

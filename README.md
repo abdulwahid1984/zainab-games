@@ -14,7 +14,7 @@ Online board games also offer computer play. Worldwide matchmaking and live play
 
 ## Profiles and child-friendly chat
 
-Guest play does not require registration. Email sign-in enables a player name, avatar, and worldwide matchmaking; guests appear in the online lobby with a temporary nickname. Family group rooms use a 12-character code or copied invite link and expire after 12 hours. Guests can see other online nicknames and use live lobby, family-room, and in-game text chat without signing in. Messages are limited to 240 characters and sent as plain text.
+Guest play does not require registration. Email sign-in enables a player name, avatar, and worldwide matchmaking; guests appear in the online lobby with a temporary nickname. Family group rooms use a 12-character code or copied invite link and expire after 12 hours. Guests can see other online nicknames and use live lobby, family-room, and in-game text chat without signing in. Messages are limited to 240 characters and sent as plain text. Seven new 15-stage campaigns add Chess Masters, Doll Dress-Up Studio, Makeup Magic Studio, Card Quest, Piano Jump, Jungle Run, and Snake Evolution. Unlocked stages, saved high scores, and the next stage are kept per browser, tied to the signed-in profile or a persistent guest identity.
 
 ## Coloring and sound
 

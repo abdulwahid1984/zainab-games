@@ -1,21 +1,24 @@
 # Zainab Games
 
-A colorful, phone-friendly family game night website hosted on GitHub Pages.
+Zainab Games is a phone-friendly arcade and family game site hosted on GitHub Pages.
 
-## Games
+## Action games
 
-The home page puts original mini-games inspired by 2026 kids' favorites first, followed by quick-play, board, online, and adventure games. The catalog includes Block Pop Builder, Goal Stars, Jungle Obby Dash, Candy Pop, Turbo Racers, Ludo, Sky Island Survival, Tic-Tac-Toe, Connect Four, and more. Rainbow Archery is a playable 10 m and 15 m archery range with draw-and-release shooting, adjustable aim, and wind. Cosmic Defender adds five escalating mobile-friendly waves; Chef's Rush adds timed order-combo levels. The redesigned arcade includes search, saved favorites, motion, and a local daily XP challenge. These are original web games, not ports of commercial games.
+The redesigned arcade puts action, racing, and adventure missions first. New original games include Neon Squad: Drone Ops (a moving arena with five waves), Drift Circuit X (lane racing with obstacles and nitro), and Dungeon Raiders (a multi-floor dungeon run). The showcased lineup also includes arcade racing, obstacle runs, goal shooting, archery at 10 m and 15 m, survival, and family board games. Games use original web mechanics and artwork rather than commercial game assets.
 
-## Profiles, friends, and chat
+## Play with family
 
-Email-only passwordless sign-in creates a starter player name; users can change the name or avatar later. Guest play is available without registering. Signed-in players see live lobby presence and can send a challenge using a private game invite.
+Use **Play with family** to create a room and copy its invite link. Open the link on another phone or computer, then choose a two-player game. Moves and preset cheers travel over Supabase Realtime; PeerJS remains as a fallback where realtime cannot connect. The invite has a random 128-bit room token and expires after four hours. Anyone with the link can enter until it expires, so share it only with the people you want in the room.
 
-Family chat rooms use a one-time 8-character code and expire after 12 hours. Messages are friendly preset phrases only, are not stored, and can also be used during a game. Sign-in links must allow `https://abdulwahid1984.github.io/zainab-games/` in Supabase Auth. The Supabase publishable key in `supabase-config.js` is intended for browser use; never put a secret or service-role key in this file.
+Online board games also offer computer play. Worldwide matchmaking and live player profiles require email sign-in. Voice and file sharing use the direct PeerJS connection when available; microphone permission is needed for voice and files are limited to 5 MB.
 
-## Rooms, voice, and files
+## Profiles and child-friendly chat
 
-Create a friend room and share its invite URL. PeerJS connects the players; voice and file sharing go directly between connected browsers. Voice needs microphone permission. Files are limited to 5 MB and are not stored.
+Guest play does not require registration. Email sign-in enables a player name, avatar, online presence, and worldwide matchmaking. Lobby and game chat use friendly preset phrases. Family group rooms have a short code and expire after 12 hours.
 
-## Hosting and database
+## Hosting and configuration
 
-GitHub Pages uses `.github/workflows/pages.yml`; commits to `main` trigger deployment. `supabase/schema.sql` documents the database schema applied to the connected Supabase project, including row-level security for profiles, matchmaking, private matches, and social rooms.
+GitHub Pages deploys from `main` using `.github/workflows/pages.yml`. Set the Supabase Auth allowed redirect URL to `https://abdulwahid1984.github.io/zainab-games/`. `supabase-config.js` contains only the public browser key; never place a service-role key there.
+
+The database schema and setup notes are in `supabase/schema.sql` and `supabase/social-chat.sql`.
+

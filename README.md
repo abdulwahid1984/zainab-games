@@ -22,3 +22,4 @@ GitHub Pages deploys from `main` using `.github/workflows/pages.yml`. Set the Su
 
 The database schema and setup notes are in `supabase/schema.sql` and `supabase/social-chat.sql`.
 
+

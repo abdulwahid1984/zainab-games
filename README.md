@@ -1,33 +1,21 @@
 # Zainab Games
 
-Zainab Games is a phone-friendly arcade and family game site hosted on GitHub Pages.
+A mobile friendly arcade site with seven fast, touch focused games. Every game has 15 stages, saved scorecards, and replay for unlocked stages.
 
-## Action games
+## New arcade lineup
 
-The redesigned arcade puts action, racing, and adventure missions first. New original games include Neon Squad: Drone Ops (a moving arena with five waves), Drift Circuit X (lane racing with obstacles and nitro), and Dungeon Raiders (a multi-floor dungeon run). The showcased lineup also includes arcade racing, obstacle runs, goal shooting, archery at 10 m and 15 m, survival, and family board games. Games use original web mechanics and artwork rather than commercial game assets.
+- Neon Kart Clash: switch lanes, dodge hazards, and use boosts.
+- Star Blaster Arena: tap moving drones through increasingly busy waves.
+- Jungle Rush Squad: jump and dodge through a colorful runner.
+- Snake Royale: guide a growing snake through the arena.
+- Card Quest Arena: find matching pairs before your moves run out.
+- Rhythm Jump: follow the tune and help the bunny reach the goal.
+- Chess Masters: play against the computer, pass-and-play, or challenge someone online.
 
-## Play with family
+Use the game cards to choose Solo, local 2 player, local 4 player, or an online family room. Local party modes pass the same device and compare round scores. Online arcade rooms broadcast challenge starts and score results; everyone plays the same stage on their own device. Online chess sends moves through the shared room.
 
-Use **Play with family** to create a room and copy its invite link. Open the link on another phone or computer, then choose a two-player game. Moves and preset cheers travel over Supabase Realtime; PeerJS remains as a fallback where realtime cannot connect. The invite has a random 128-bit room token and expires after four hours. Anyone with the link can enter until it expires, so share it only with the people you want in the room.
+Scorecards are saved in browser storage for the signed-in profile or guest identity on that device. They do not currently sync between devices.
 
-Online board games also offer computer play. Worldwide matchmaking and live player profiles require email sign-in. Voice and file sharing use the direct PeerJS connection when available; microphone permission is needed for voice and files are limited to 5 MB.
+## Hosting
 
-## Profiles and child-friendly chat
-
-Guest play does not require registration. Email sign-in enables a player name, avatar, and worldwide matchmaking; guests appear in the online lobby with a temporary nickname. Family group rooms use a 12-character code or copied invite link and expire after 12 hours. Guests can see other online nicknames and use live lobby, family-room, and in-game text chat without signing in. Messages are limited to 240 characters and sent as plain text. Seven new 15-stage campaigns add Chess Masters, Doll Dress-Up Studio, Makeup Magic Studio, Card Quest, Piano Jump, Jungle Run, and Snake Evolution. Unlocked stages, saved high scores, and the next stage are kept per browser, tied to the signed-in profile or a persistent guest identity.
-
-## Coloring and sound
-
-Coloring Art Studio has 15 searchable pictures, fill, brush and eraser tools, undo, clear, and PNG save. The Music toggle starts gentle site ambience and switches to a livelier game melody while playing; short sound effects respond to turns and actions. Posters have subtle motion and respect reduced-motion settings.
-
-## Hosting and configuration
-
-GitHub Pages deploys from `main` using `.github/workflows/pages.yml`. Set the Supabase Auth allowed redirect URL to `https://abdulwahid1984.github.io/zainab-games/`. `supabase-config.js` contains only the public browser key; never place a service-role key there.
-
-The database schema and setup notes are in `supabase/schema.sql` and `supabase/social-chat.sql`.
-
-
-
-
-
-
+GitHub Pages deploys from `main` using `.github/workflows/pages.yml`. The page uses the existing Supabase Realtime connection for family-room presence, challenge events, and chess moves. Set the Supabase Auth allowed redirect URL to `https://abdulwahid1984.github.io/zainab-games/`. `supabase-config.js` contains only the public browser key; never place a service-role key there.
